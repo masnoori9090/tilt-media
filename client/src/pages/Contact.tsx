@@ -6,6 +6,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Send, ArrowRight } from "lucide-react";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 import AnimatedSection from "@/components/AnimatedSection";
 
 const DUBAI_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310419663030033902/9hpfYMUD3osJpZXz9UmNvK/dubai-skyline-mtgq7QkasK6q27ENDTxUvy.webp";
@@ -19,12 +21,34 @@ export default function Contact() {
     message: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const submitLeadMutation = trpc.leads.submit.useMutation();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => setFormSubmitted(false), 4000);
-    setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      await submitLeadMutation.mutateAsync({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        service: formData.service || undefined,
+        message: formData.message || undefined,
+        source: "contact",
+      });
+
+      setFormSubmitted(true);
+      setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+      toast.success("Message sent successfully!");
+      setTimeout(() => setFormSubmitted(false), 4000);
+    } catch (error) {
+      console.error("Form submission error:", error);
+      toast.error("Failed to submit form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -155,9 +179,10 @@ export default function Contact() {
 
                         <button
                           type="submit"
-                          className="w-full px-6 py-4 bg-[#E8541A] text-white font-display text-base uppercase border-3 border-[#1a1a1a] brutal-shadow hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[7px_7px_0_0_#1a1a1a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_0_#1a1a1a] transition-all duration-150 flex items-center justify-center gap-2"
+                          disabled={isSubmitting}
+                          className="w-full px-6 py-4 bg-[#E8541A] text-white font-display text-base uppercase border-3 border-[#1a1a1a] brutal-shadow hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[7px_7px_0_0_#1a1a1a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_0_#1a1a1a] transition-all duration-150 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          Send Message <ArrowRight size={18} />
+                          {isSubmitting ? "Sending..." : "Send Message"} <ArrowRight size={18} />
                         </button>
                       </form>
                     </>

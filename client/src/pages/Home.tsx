@@ -9,6 +9,9 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 import {
   Target, Search, Share2, Palette, Globe, Bot, TrendingUp,
   ArrowRight, Star, ChevronLeft, ChevronRight, Send
@@ -57,15 +60,41 @@ const testimonials = [
 ];
 
 export default function Home() {
+  // The userAuth hooks provides authentication state
+  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
+  let { user, loading, error, isAuthenticated, logout } = useAuth();
+
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", service: "", message: "" });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const submitLeadMutation = trpc.leads.submit.useMutation();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => setFormSubmitted(false), 3000);
-    setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      await submitLeadMutation.mutateAsync({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        service: formData.service || undefined,
+        message: formData.message || undefined,
+        source: "home",
+      });
+
+      setFormSubmitted(true);
+      setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+      toast.success("Lead submitted successfully!");
+      setTimeout(() => setFormSubmitted(false), 4000);
+    } catch (error) {
+      console.error("Form submission error:", error);
+      toast.error("Failed to submit form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const nextTestimonial = () => setCurrentTestimonial((p) => (p + 1) % testimonials.length);
@@ -391,9 +420,10 @@ export default function Home() {
                     />
                     <button
                       type="submit"
-                      className="w-full px-6 py-4 bg-[#E8541A] text-white font-display text-base uppercase border-3 border-[#1a1a1a] brutal-shadow hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[7px_7px_0_0_#1a1a1a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_0_#1a1a1a] transition-all duration-150"
+                      disabled={isSubmitting}
+                      className="w-full px-6 py-4 bg-[#E8541A] text-white font-display text-base uppercase border-3 border-[#1a1a1a] brutal-shadow hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[7px_7px_0_0_#1a1a1a] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_0_#1a1a1a] transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Send Message
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </button>
                   </form>
                 )}
