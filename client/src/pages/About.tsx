@@ -53,7 +53,7 @@ export default function About() {
           </AnimatedSection>
           <AnimatedSection delay={0.2}>
             <p className="text-lg text-gray-300 max-w-2xl font-body leading-relaxed">
-              Born in Dubai. Built different. Tilt Media is a crew of digital mavericks who believe marketing should be bold, fun, and ridiculously effective.
+              The creative house for brands that move before the market. We don't follow trends — we tilt them.
             </p>
           </AnimatedSection>
         </div>
@@ -85,13 +85,13 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-gray-600 font-body leading-relaxed">
                 <p>
-                  Tilt Media was born from a simple frustration: too many agencies were playing it safe. Generic strategies, recycled content, boring results. We knew there had to be a better way.
+                  Tilt is a new-age marketing agency built for the culture-driven generation. Born from a collective of creators, strategists, and designers, we exist to shake the traditional agency model.
                 </p>
                 <p>
-                  So we built an agency that does things differently. We assembled a team of creative rebels, data nerds, and strategic thinkers — all united by one belief: marketing should make people stop scrolling and start paying attention.
+                  Our work blends strategy, storytelling, and design to create content that feels real, moves fast, and connects deeper. We're not here to play it safe — we're here to redefine what marketing looks like when it's made by the ones shaping the internet.
                 </p>
                 <p>
-                  Based in the heart of Dubai, we've helped over 150 brands across the UAE and beyond transform their digital presence. From startups to established enterprises, we bring the same energy and obsession with results to every project.
+                  Bold ideas. Fast execution. Real impact. That's Tilt. We don't sell products — we build obsession.
                 </p>
               </div>
             </AnimatedSection>

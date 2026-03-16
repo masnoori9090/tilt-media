@@ -36,7 +36,7 @@ export default function Mission() {
           </AnimatedSection>
           <AnimatedSection delay={0.2}>
             <p className="text-lg text-white/80 max-w-2xl font-body leading-relaxed">
-              We exist to prove that marketing can be bold, fun, AND effective. No compromises.
+              To redefine how brands connect with the new generation.
             </p>
           </AnimatedSection>
         </div>
@@ -52,10 +52,10 @@ export default function Mission() {
                 {/* Decorative quote mark */}
                 <span className="absolute -top-8 -left-4 font-display text-9xl text-[#E8541A]/20 leading-none">"</span>
                 <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#1a1a1a] leading-tight mb-6">
-                  Our mission is to empower brands with <span className="text-[#E8541A]">bold digital strategies</span> that cut through the noise, connect with real people, and drive <span className="text-[#E8541A]">measurable growth</span>.
+                  We bridge creativity with culture — turning ideas into stories people actually want to watch, share, and remember.
                 </h2>
                 <p className="text-gray-600 font-body text-lg leading-relaxed">
-                  We believe every brand has a story worth telling — and we're here to make sure the world hears it. Loud and clear.
+                  We're here to make marketing feel less like advertising, and more like a movement. Tilt exists to shift perspectives, spark emotion, and create work that lives where people live — online, in real time, and always ahead of the curve.
                 </p>
               </div>
             </AnimatedSection>
@@ -77,10 +77,10 @@ export default function Mission() {
                   Our <span className="text-[#E8541A]">Vision</span>
                 </h2>
                 <p className="text-gray-300 font-body text-lg leading-relaxed">
-                  To be the most impactful digital marketing agency in the Middle East — known not just for results, but for changing how brands think about marketing entirely.
+                  Our promise? To make you stand out.
                 </p>
                 <p className="text-gray-400 font-body leading-relaxed">
-                  We envision a world where every business, from scrappy startups to global enterprises, has access to marketing that's creative, data-driven, and genuinely exciting. We want to make "boring marketing" a thing of the past.
+                  We believe creativity should be fearless, fast, and felt. At Tilt, we don't aim for perfection — we aim for impact.
                 </p>
               </div>
             </AnimatedSection>

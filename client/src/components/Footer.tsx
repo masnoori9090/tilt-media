@@ -23,17 +23,16 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               {[
-                { icon: Instagram, href: "#" },
-                { icon: Facebook, href: "#" },
-                { icon: Linkedin, href: "#" },
-                { icon: Twitter, href: "#" },
-              ].map(({ icon: Icon, href }, i) => (
+                { icon: Instagram, href: "https://www.instagram.com/tiltmedia.ae/", label: "Instagram UAE" },
+                { icon: Instagram, href: "https://www.instagram.com/tiltmedia.ar/", label: "Instagram AR" },
+              ].map(({ icon: Icon, href, label }, i) => (
                 <a
                   key={i}
                   href={href}
                   className="w-10 h-10 border-2 border-white/30 flex items-center justify-center hover:bg-[#E8541A] hover:border-[#E8541A] hover:rotate-[-5deg] transition-all duration-300"
                   target="_blank"
                   rel="noopener noreferrer"
+                  title={label}
                 >
                   <Icon size={18} />
                 </a>
@@ -107,8 +106,8 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Mail size={18} className="text-[#E8541A] mt-0.5 shrink-0" />
-                <a href="mailto:hello@tiltmedia.ae" className="text-gray-400 hover:text-[#E8541A] text-sm font-body transition-colors">
-                  hello@tiltmedia.ae
+                <a href="mailto:info@tilt.ae" className="text-gray-400 hover:text-[#E8541A] text-sm font-body transition-colors">
+                  info@tilt.ae
                 </a>
               </li>
             </ul>

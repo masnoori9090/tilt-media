@@ -227,8 +227,8 @@ export default function Contact() {
                       </div>
                       <div>
                         <p className="text-white font-display text-sm">Email</p>
-                        <a href="mailto:hello@tiltmedia.ae" className="text-gray-400 hover:text-[#E8541A] font-body text-sm mt-1 block transition-colors">
-                          hello@tiltmedia.ae
+                        <a href="mailto:info@tilt.ae" className="text-gray-400 hover:text-[#E8541A] font-body text-sm mt-1 block transition-colors">
+                          info@tilt.ae
                         </a>
                       </div>
                     </li>
