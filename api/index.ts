@@ -4,4 +4,5 @@ import { serveStatic } from "../server/_core/vite";
 const app = createApp();
 serveStatic(app);
 
+// Vercel serverless handler
 export default app;

@@ -51,22 +51,43 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPublicFromSource = path.resolve(CURRENT_DIR, "../..", "dist", "public");
-  const distPublicFromBundle = path.resolve(CURRENT_DIR, "public");
-  const distPath = fs.existsSync(distPublicFromSource)
-    ? distPublicFromSource
-    : distPublicFromBundle;
+  // Try multiple possible paths for different environments (Vercel, local, etc.)
+  const possiblePaths = [
+    // Vercel production paths
+    path.resolve(process.cwd(), "dist", "public"),
+    path.resolve(process.cwd(), "dist"),
+    // Local development paths
+    path.resolve(CURRENT_DIR, "../..", "dist", "public"),
+    path.resolve(CURRENT_DIR, "..", "..", "dist", "public"),
+    // Relative to server directory
+    path.resolve(CURRENT_DIR, "public"),
+    path.resolve(CURRENT_DIR, "..", "public"),
+  ];
 
-  if (!fs.existsSync(distPath)) {
-    console.error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`
-    );
+  let distPath: string | null = null;
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) {
+      distPath = p;
+      break;
+    }
   }
 
+  if (!distPath) {
+    console.error(
+      `Could not find the build directory. Tried: ${possiblePaths.join(", ")}. Make sure to build the client first.`
+    );
+    // Return a middleware that returns 404
+    app.use("*", (_req, res) => {
+      res.status(404).json({ error: "Build not found. Please run the build first." });
+    });
+    return;
+  }
+
+  console.log(`Serving static files from: ${distPath}`);
   app.use(express.static(distPath));
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+    res.sendFile(path.resolve(distPath!, "index.html"));
   });
 }
