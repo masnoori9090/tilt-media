@@ -13,9 +13,9 @@ const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310419663030033902/9hpfY
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/mission", label: "Mission" },
   { href: "/services", label: "Services" },
-  { href: "/contact", label: "Contact" },
+  { href: "/portfolio", label: "Work" },
+  { href: "/mission", label: "Mission" },
 ];
 
 export default function Navbar() {

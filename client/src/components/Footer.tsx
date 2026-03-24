@@ -47,8 +47,9 @@ export default function Footer() {
               {[
                 { label: "Home", href: "/" },
                 { label: "About Us", href: "/about" },
-                { label: "Our Mission", href: "/mission" },
+                { label: "Our Work", href: "/portfolio" },
                 { label: "Services", href: "/services" },
+                { label: "Our Mission", href: "/mission" },
                 { label: "Contact", href: "/contact" },
               ].map((link) => (
                 <li key={link.href}>
@@ -68,12 +69,15 @@ export default function Footer() {
             <h4 className="font-display text-lg mb-5 text-[#E8541A]">Services</h4>
             <ul className="space-y-3">
               {[
-                "Meta Ads",
-                "Google Ads",
-                "Social Media",
-                "Content Creation",
+                "Brand Identity & Strategy",
+                "Video Production",
+                "Photography",
+                "Meta & Google Ads",
+                "Social Media Management",
+                "PR & Communications",
+                "Events & Activations",
+                "OOH & Media Buying",
                 "Website Design",
-                "AI & Automation",
                 "SEO",
               ].map((service) => (
                 <li key={service}>

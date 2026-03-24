@@ -1,20 +1,17 @@
 /*
  * DESIGN: Neo-Brutalist Pop — Home Page
- * Hero: Bold headline over geometric bg, diagonal cut bottom
- * Services: Grid cards with thick borders and hard shadows
- * Stats: Orange band with animated counters
- * Testimonials: Carousel with brutalist cards
- * CTA: Lead capture form with bold styling
+ * Full-service media agency positioning
+ * Hero → Services Overview → Stats → Client Logos → Why Tilt → Testimonials → CTA
  */
 import { useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import {
   Target, Search, Share2, Palette, Globe, Bot, TrendingUp,
-  ArrowRight, Star, ChevronLeft, ChevronRight, Send
+  ArrowRight, Star, ChevronLeft, ChevronRight, Send,
+  Film, Camera, Megaphone, CalendarDays, BarChart3, Brush
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import CountUp from "@/components/CountUp";
@@ -23,47 +20,53 @@ const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310419663030033902/9hpfYM
 const SERVICES_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310419663030033902/9hpfYMUD3osJpZXz9UmNvK/services-bg-ey5oYnbnzrvqHtWMXV68hn.webp";
 
 const services = [
-  { icon: Target, title: "Meta Ads", desc: "Facebook & Instagram campaigns that convert scrollers into customers." },
-  { icon: Search, title: "Google Ads", desc: "Dominate search results and get found by people ready to buy." },
-  { icon: Share2, title: "Social Media", desc: "Build a community that actually cares about your brand." },
-  { icon: Palette, title: "Content Creation", desc: "Scroll-stopping content that makes your brand unforgettable." },
+  { icon: Brush, title: "Brand Identity", desc: "Complete brand systems that make your identity impossible to ignore." },
+  { icon: Film, title: "Video Production", desc: "Cinematic content from concept to final cut — all in-house." },
+  { icon: Camera, title: "Photography", desc: "Commercial and lifestyle photography that elevates every platform." },
+  { icon: Target, title: "Meta & Google Ads", desc: "Performance campaigns engineered for maximum ROI." },
+  { icon: Share2, title: "Social Media", desc: "Content, community, and growth across every platform." },
+  { icon: Palette, title: "Graphic Design", desc: "Visuals that stop the scroll and drive action." },
+  { icon: Megaphone, title: "PR & Communications", desc: "Earned media and reputation management across Arabic & English press." },
+  { icon: CalendarDays, title: "Events & Activations", desc: "Brand experiences people talk about long after they leave." },
+  { icon: BarChart3, title: "Media Buying & OOH", desc: "From Sheikh Zayed Road billboards to programmatic display." },
   { icon: Globe, title: "Website Design", desc: "Websites that look incredible and actually drive results." },
-  { icon: Bot, title: "AI & Automation", desc: "Work smarter with AI-powered marketing workflows." },
   { icon: TrendingUp, title: "SEO", desc: "Climb the rankings and own your space on Google." },
+  { icon: Bot, title: "AI & Automation", desc: "Work smarter with AI-powered marketing workflows." },
 ];
 
 const testimonials = [
   {
     name: "Sarah Al-Rashid",
     company: "Luxe Properties Dubai",
-    text: "Tilt Media completely transformed our digital presence. Our leads tripled in just 3 months. These guys don't play around.",
+    text: "Tilt Media completely transformed our digital presence. Our leads tripled in just 3 months. From the brand refresh to the video production — everything was world-class.",
     rating: 5,
   },
   {
     name: "Ahmed Hassan",
     company: "Desert Bloom Restaurants",
-    text: "The content they create is insane. Our Instagram went from 2K to 50K followers. Every post they make goes viral.",
+    text: "The content they create is insane. Our Instagram went from 2K to 50K followers and the photography they did for our new menu was stunning. Every post goes viral.",
     rating: 5,
   },
   {
     name: "Priya Sharma",
     company: "TechVenture MENA",
-    text: "Their Google Ads strategy cut our cost per lead by 60%. The ROI speaks for itself. Best agency decision we've made.",
+    text: "Their Google Ads strategy cut our cost per lead by 60%. We also used them for a PR push and got picked up by Gulf News and Khaleej Times. The ROI speaks for itself.",
     rating: 5,
   },
   {
     name: "Omar Khalil",
     company: "FitZone UAE",
-    text: "Bold, creative, and they actually deliver results. Tilt Media is the real deal. Our membership signups are through the roof.",
+    text: "We came to Tilt for social media and ended up doing our brand identity, a full video campaign, and a Sheikh Zayed Road billboard. They deliver on everything.",
     rating: 5,
   },
 ];
 
-export default function Home() {
-  // The userAuth hooks provides authentication state
-  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
-  let { user, loading, error, isAuthenticated, logout } = useAuth();
+const industries = [
+  "Real Estate", "F&B", "Retail", "Technology", "Hospitality",
+  "Fashion", "Healthcare", "Automotive", "Education", "Finance",
+];
 
+export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", service: "", message: "" });
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -74,7 +77,6 @@ export default function Home() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
       await submitLeadMutation.mutateAsync({
         name: formData.name,
@@ -84,10 +86,9 @@ export default function Home() {
         message: formData.message || undefined,
         source: "home",
       });
-
       setFormSubmitted(true);
       setFormData({ name: "", email: "", phone: "", service: "", message: "" });
-      toast.success("Lead submitted successfully!");
+      toast.success("Message sent successfully!");
       setTimeout(() => setFormSubmitted(false), 4000);
     } catch (error) {
       console.error("Form submission error:", error);
@@ -104,19 +105,17 @@ export default function Home() {
     <div className="min-h-screen pt-20">
       {/* ===== HERO SECTION ===== */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#1a1a1a]">
-        {/* Background Image */}
         <div
           className="absolute inset-0 opacity-40"
-          style={{ backgroundImage: `url(${HERO_BG})`, backgroundSize: "cover", backgroundPosition: "center" }}
+          style={{ backgroundImage: "url(" + HERO_BG + ")", backgroundSize: "cover", backgroundPosition: "center" }}
         />
-        {/* Overlay pattern */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a]/70 to-transparent" />
 
         <div className="container relative z-10 py-20">
           <div className="max-w-3xl">
             <AnimatedSection delay={0.1}>
               <div className="inline-block px-4 py-2 bg-[#E8541A] text-white font-display text-sm uppercase border-3 border-[#1a1a1a] brutal-shadow-sm mb-6 rotate-[-2deg]">
-                Dubai's Boldest Agency
+                Dubai's Full-Service Media Agency
               </div>
             </AnimatedSection>
 
@@ -132,8 +131,7 @@ export default function Home() {
 
             <AnimatedSection delay={0.4}>
               <p className="text-lg sm:text-xl text-gray-300 max-w-xl mb-8 font-body leading-relaxed">
-                We're the digital marketing agency that makes brands impossible to ignore.
-                Bold strategies. Killer content. Real results. Based in Dubai, shaking up the world.
+                Brand strategy. Video production. Digital campaigns. PR. Events. OOH. We handle every facet of your brand's growth — boldly, and with real results.
               </p>
             </AnimatedSection>
 
@@ -143,7 +141,7 @@ export default function Home() {
                   href="/services"
                   className="inline-flex items-center gap-2 px-7 py-4 bg-[#E8541A] text-white font-display text-base uppercase border-3 border-[#1a1a1a] brutal-shadow-lg hover:translate-x-[-3px] hover:translate-y-[-3px] hover:shadow-[11px_11px_0_0_#1a1a1a] transition-all duration-200"
                 >
-                  Our Services <ArrowRight size={20} />
+                  Explore Services <ArrowRight size={20} />
                 </Link>
                 <Link
                   href="/contact"
@@ -156,8 +154,19 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Diagonal bottom cut */}
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-white" style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%)" }} />
+      </section>
+
+      {/* ===== INDUSTRY TICKER ===== */}
+      <section className="bg-[#E8541A] py-4 border-y-4 border-[#1a1a1a] overflow-hidden">
+        <div className="flex gap-0 whitespace-nowrap">
+          {[...industries, ...industries, ...industries].map((industry, i) => (
+            <span key={i} className="inline-flex items-center gap-4 px-6 font-display text-sm text-white uppercase tracking-wider">
+              {industry}
+              <span className="w-2 h-2 bg-white/50 rotate-45 inline-block shrink-0" />
+            </span>
+          ))}
+        </div>
       </section>
 
       {/* ===== SERVICES OVERVIEW ===== */}
@@ -168,9 +177,9 @@ export default function Home() {
               <div>
                 <span className="font-display text-sm text-[#E8541A] uppercase tracking-wider">What We Do</span>
                 <h2 className="text-4xl sm:text-5xl lg:text-6xl text-[#1a1a1a] mt-2">
-                  Services That
+                  Every Service
                   <br />
-                  <span className="text-[#E8541A]">Hit Different</span>
+                  <span className="text-[#E8541A]">Your Brand Needs</span>
                 </h2>
               </div>
               <Link
@@ -184,7 +193,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {services.map((service, i) => (
-              <AnimatedSection key={service.title} delay={i * 0.08}>
+              <AnimatedSection key={service.title} delay={i * 0.06}>
                 <Link href="/services">
                   <motion.div
                     whileHover={{ y: -5, rotate: -1 }}
@@ -208,7 +217,7 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { number: 150, suffix: "+", label: "Clients Served" },
+              { number: 200, suffix: "+", label: "Brands Elevated" },
               { number: 500, suffix: "+", label: "Campaigns Launched" },
               { number: 10, suffix: "M+", label: "Ad Spend Managed" },
               { number: 98, suffix: "%", label: "Client Retention" },
@@ -230,7 +239,7 @@ export default function Home() {
       <section className="py-20 bg-[#1a1a1a] relative">
         <div
           className="absolute inset-0 opacity-10"
-          style={{ backgroundImage: `url(${SERVICES_BG})`, backgroundSize: "cover", backgroundPosition: "center" }}
+          style={{ backgroundImage: "url(" + SERVICES_BG + ")", backgroundSize: "cover", backgroundPosition: "center" }}
         />
         <div className="container relative z-10">
           <AnimatedSection>
@@ -245,8 +254,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                title: "We're Not Basic",
-                desc: "Cookie-cutter strategies? Not our thing. Every campaign is custom-built to make YOUR brand stand out from the noise.",
+                title: "One Agency. Every Service.",
+                desc: "Brand identity. Video. Social media. PR. OOH. Events. We do it all under one roof — no briefing five different agencies, no fragmented strategy.",
                 num: "01",
               },
               {
@@ -256,7 +265,7 @@ export default function Home() {
               },
               {
                 title: "Dubai DNA",
-                desc: "We know this market inside out. From local culture to global trends, we bridge the gap between your brand and your audience.",
+                desc: "We know this market inside out. From local culture to global trends, we bridge the gap between your brand and your audience — in Arabic and English.",
                 num: "03",
               },
             ].map((item, i) => (
@@ -288,24 +297,20 @@ export default function Home() {
             <AnimatedSection>
               <div className="relative">
                 <div className="p-8 sm:p-10 bg-[#FFF8F0] border-3 border-[#1a1a1a] brutal-shadow-lg">
-                  {/* Stars */}
                   <div className="flex gap-1 mb-4">
                     {Array.from({ length: testimonials[currentTestimonial].rating }).map((_, i) => (
                       <Star key={i} size={20} className="fill-[#E8541A] text-[#E8541A]" />
                     ))}
                   </div>
-                  {/* Quote */}
                   <p className="text-lg sm:text-xl text-[#1a1a1a] font-body leading-relaxed mb-6 italic">
                     "{testimonials[currentTestimonial].text}"
                   </p>
-                  {/* Author */}
                   <div>
                     <p className="font-display text-lg text-[#1a1a1a]">{testimonials[currentTestimonial].name}</p>
                     <p className="text-sm text-gray-500 font-body">{testimonials[currentTestimonial].company}</p>
                   </div>
                 </div>
 
-                {/* Navigation */}
                 <div className="flex justify-center gap-3 mt-6">
                   <button
                     onClick={prevTestimonial}
@@ -318,9 +323,7 @@ export default function Home() {
                       <button
                         key={i}
                         onClick={() => setCurrentTestimonial(i)}
-                        className={`w-3 h-3 border-2 border-[#1a1a1a] transition-all duration-200 ${
-                          i === currentTestimonial ? "bg-[#E8541A]" : "bg-white"
-                        }`}
+                        className={"w-3 h-3 border-2 border-[#1a1a1a] transition-all duration-200 " + (i === currentTestimonial ? "bg-[#E8541A]" : "bg-white")}
                       />
                     ))}
                   </div>
@@ -339,13 +342,11 @@ export default function Home() {
 
       {/* ===== CTA + LEAD FORM ===== */}
       <section className="py-20 bg-[#1a1a1a] relative overflow-hidden">
-        {/* Decorative tilted orange block */}
         <div className="absolute -right-20 -top-20 w-80 h-80 bg-[#E8541A] rotate-12 opacity-20" />
         <div className="absolute -left-10 -bottom-10 w-60 h-60 bg-[#E8541A] rotate-[-15deg] opacity-10" />
 
         <div className="container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left: CTA Text */}
             <AnimatedSection direction="left">
               <span className="font-display text-sm text-[#E8541A] uppercase tracking-wider">Ready to Grow?</span>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl text-white mt-2 mb-6">
@@ -360,7 +361,6 @@ export default function Home() {
               </p>
             </AnimatedSection>
 
-            {/* Right: Lead Form */}
             <AnimatedSection direction="right">
               <div className="p-8 bg-white border-3 border-[#1a1a1a] brutal-shadow-lg">
                 {formSubmitted ? (
@@ -403,13 +403,18 @@ export default function Home() {
                       className="w-full px-4 py-3 border-3 border-[#1a1a1a] font-body text-[#1a1a1a] bg-white focus:outline-none focus:border-[#E8541A] focus:shadow-[3px_3px_0_0_#E8541A] transition-all"
                     >
                       <option value="">Service Interested In</option>
+                      <option value="brand-identity">Brand Identity & Strategy</option>
+                      <option value="video-production">Video Production</option>
+                      <option value="photography">Photography</option>
                       <option value="meta-ads">Meta Ads</option>
                       <option value="google-ads">Google Ads</option>
                       <option value="social-media">Social Media Management</option>
-                      <option value="content">Content Creation</option>
+                      <option value="pr">PR & Communications</option>
+                      <option value="events">Events & Activations</option>
+                      <option value="ooh">OOH / Media Buying</option>
                       <option value="website">Website Design</option>
-                      <option value="ai">AI & Automation</option>
                       <option value="seo">SEO</option>
+                      <option value="full-package">Full Service Package</option>
                     </select>
                     <textarea
                       placeholder="Tell us about your project..."
