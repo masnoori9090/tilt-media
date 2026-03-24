@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Mission from "./pages/Mission";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
+import Portfolio from "./pages/Portfolio";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/mission" component={Mission} />
       <Route path="/services" component={Services} />
+      <Route path="/portfolio" component={Portfolio} />
       <Route path="/contact" component={Contact} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
