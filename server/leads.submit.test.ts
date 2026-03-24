@@ -1,6 +1,7 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { appRouter } from "./routers";
 import type { TrpcContext } from "./_core/context";
+import { createLead } from "./db";
 
 /**
  * Mock database functions for testing
@@ -132,5 +133,20 @@ describe("leads.submit", () => {
     expect(result?.phone).toBeNull();
     expect(result?.service).toBeNull();
     expect(result?.message).toBeNull();
+  });
+
+  it("throws when lead persistence is unavailable", async () => {
+    const ctx = createPublicContext();
+    const caller = appRouter.createCaller(ctx);
+
+    vi.mocked(createLead).mockResolvedValueOnce(null);
+
+    await expect(
+      caller.leads.submit({
+        name: "Unavailable Lead",
+        email: "offline@example.com",
+        source: "home",
+      })
+    ).rejects.toThrow("Lead submission is temporarily unavailable");
   });
 });

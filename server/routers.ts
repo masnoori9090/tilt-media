@@ -1,4 +1,5 @@
 import { COOKIE_NAME } from "@shared/const";
+import { TRPCError } from "@trpc/server";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router, protectedProcedure } from "./_core/trpc";
@@ -44,6 +45,14 @@ export const appRouter = router({
           source: (input.source || "home") as "home" | "contact",
           status: "new",
         });
+
+        if (!lead) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Lead submission is temporarily unavailable",
+          });
+        }
+
         return lead;
       }),
 
@@ -114,6 +123,13 @@ export const appRouter = router({
             fileSize: input.fileData.length,
             relatedLeadId: input.relatedLeadId || null,
           });
+
+          if (!fileUpload) {
+            throw new TRPCError({
+              code: "INTERNAL_SERVER_ERROR",
+              message: "File upload could not be saved",
+            });
+          }
 
           return fileUpload;
         } catch (error) {
