@@ -204,9 +204,9 @@ export default function Contact() {
                       <div>
                         <p className="text-white font-display text-sm">Address</p>
                         <p className="text-gray-400 font-body text-sm mt-1">
-                          Business Bay, Churchill Towers
+                          46C9+J9V - Al Qouz Ind. Third
                           <br />
-                          Dubai, United Arab Emirates
+                          Al Quoz, Dubai
                         </p>
                       </div>
                     </li>
@@ -239,9 +239,9 @@ export default function Contact() {
                       <div>
                         <p className="text-white font-display text-sm">Working Hours</p>
                         <p className="text-gray-400 font-body text-sm mt-1">
-                          Sun - Thu: 9:00 AM - 6:00 PM
+                          Mon - Fri: 9:00 AM - 6:00 PM
                           <br />
-                          Fri - Sat: Closed
+                          Sat - Sun: Closed
                         </p>
                       </div>
                     </li>
@@ -294,14 +294,14 @@ export default function Contact() {
           <AnimatedSection>
             <div className="border-3 border-white/20 brutal-shadow-lg overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.178509393!2d55.26!3d25.19!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43348a67e24b%3A0xff45e502e1ceb7e2!2sBusiness%20Bay%20-%20Dubai!5e0!3m2!1sen!2sae!4v1710000000000!5m2!1sen!2sae"
+                src="https://www.google.com/maps?q=46C9%2BJ9V+Al+Quoz+Dubai&output=embed"
                 width="100%"
                 height="400"
                 style={{ border: 0, filter: "grayscale(80%) contrast(1.1)" }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Tilt Media Location - Business Bay, Dubai"
+                title="Tilt Media Location - Cave Studios, Dubai"
               />
             </div>
           </AnimatedSection>
