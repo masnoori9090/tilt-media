@@ -204,9 +204,9 @@ export default function Contact() {
                       <div>
                         <p className="text-white font-display text-sm">Address</p>
                         <p className="text-gray-400 font-body text-sm mt-1">
-                          Business Bay, Churchill Towers
+                          46C9+J9V - Al Qouz Ind. Third
                           <br />
-                          Dubai, United Arab Emirates
+                          Al Quoz, Dubai
                         </p>
                       </div>
                     </li>
@@ -294,7 +294,7 @@ export default function Contact() {
           <AnimatedSection>
             <div className="border-3 border-white/20 brutal-shadow-lg overflow-hidden">
               <iframe
-                src="https://www.google.com/maps?q=Cave+Studios+Dubai&output=embed"
+                src="https://www.google.com/maps?q=46C9%2BJ9V+Al+Quoz+Dubai&output=embed"
                 width="100%"
                 height="400"
                 style={{ border: 0, filter: "grayscale(80%) contrast(1.1)" }}
