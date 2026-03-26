@@ -71,7 +71,7 @@ export default function About() {
                 </div>
                 {/* Floating badge */}
                 <div className="absolute -bottom-4 -right-4 px-5 py-3 bg-[#E8541A] text-white font-display text-sm border-3 border-[#1a1a1a] brutal-shadow-sm rotate-[3deg]">
-                  Est. Dubai 2020
+                  Est. Dubai 2025
                 </div>
               </div>
             </AnimatedSection>
