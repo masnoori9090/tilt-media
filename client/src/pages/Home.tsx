@@ -217,9 +217,9 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { number: 200, suffix: "+", label: "Brands Elevated" },
-              { number: 500, suffix: "+", label: "Campaigns Launched" },
-              { number: 10, suffix: "M+", label: "Ad Spend Managed" },
+              { number: 100, suffix: "+", label: "Clients" },
+              { number: 200, suffix: "+", label: "Campaigns" },
+              { number: 3, suffix: "M+", label: "Ad Spend Managed" },
               { number: 98, suffix: "%", label: "Client Retention" },
             ].map((stat, i) => (
               <AnimatedSection key={stat.label} delay={i * 0.1}>
