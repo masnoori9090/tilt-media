@@ -301,7 +301,7 @@ export default function Contact() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Tilt Media Location - Cave Studios, Dubai"
+                title="Tilt Media Location - Tilt Studio, Dubai"
               />
             </div>
           </AnimatedSection>
