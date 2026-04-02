@@ -215,12 +215,11 @@ export default function Home() {
       {/* ===== STATS SECTION ===== */}
       <section className="bg-[#E8541A] py-16 diagonal-both relative z-10">
         <div className="container">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {[
               { number: 100, suffix: "+", label: "Clients" },
               { number: 200, suffix: "+", label: "Campaigns" },
               { number: 3, suffix: "M+", label: "Ad Spend Managed" },
-              { number: 98, suffix: "%", label: "Client Retention" },
             ].map((stat, i) => (
               <AnimatedSection key={stat.label} delay={i * 0.1}>
                 <div className="text-center">
