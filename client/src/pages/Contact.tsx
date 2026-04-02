@@ -204,9 +204,9 @@ export default function Contact() {
                       <div>
                         <p className="text-white font-display text-sm">Address</p>
                         <p className="text-gray-400 font-body text-sm mt-1">
-                          46C9+J9V - Al Qouz Ind. Third
+                          Warehouse 99, Goshi Warehouse City
                           <br />
-                          Al Quoz, Dubai
+                          Al Quoz 3, Dubai - Tilt Media
                         </p>
                       </div>
                     </li>
