@@ -99,7 +99,7 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-[#E8541A] mt-0.5 shrink-0" />
                 <span className="text-gray-400 text-sm font-body">
-                  Business Bay, Dubai, UAE
+                  46C9+J9V - Al Qouz Ind. Third - Al Quoz - Dubai, Cave Studio
                 </span>
               </li>
               <li className="flex items-start gap-3">
