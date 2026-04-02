@@ -216,8 +216,8 @@ export default function Contact() {
                       </div>
                       <div>
                         <p className="text-white font-display text-sm">Phone</p>
-                        <a href="tel:+971501234567" className="text-gray-400 hover:text-[#E8541A] font-body text-sm mt-1 block transition-colors">
-                          +971 50 123 4567
+                        <a href="tel:+971585911780" className="text-gray-400 hover:text-[#E8541A] font-body text-sm mt-1 block transition-colors">
+                          +971 58 591 1780
                         </a>
                       </div>
                     </li>
